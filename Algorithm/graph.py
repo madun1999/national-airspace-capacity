@@ -68,6 +68,14 @@ class Graph:
             self.FLAT_E = self.ROW * self.ROW 
         return self.FLAT_E
 
+    def enumerate_flat_edge(self):
+        self.num_flat_edges()
+        for i, row in enumerate(self.flat_graph):
+            for j, cap in enumerate(row):
+                if cap != 0:
+                    assert cap > 0
+                    yield (i,j,cap)
+        
     def edge_id(self, i, j):
         return i * self.ROW + j
     def incident_matrix(self):
@@ -75,7 +83,7 @@ class Graph:
         # agrees with capacity vector
         # but with sentinel source and sink at the end
         self.num_flat_edges()
-        mat = [[0 for _ in range(self.FLAT_E + 2)] for _ in range(self.ROW + 2)]
+        mat = [[0 for _ in range(self.FLAT_E + 2)] for _ in range(self.ROW)]
         for i, row in enumerate(self.flat_graph):
             for j, cap in enumerate(row):
                 edge_id = self.edge_id(i, j)

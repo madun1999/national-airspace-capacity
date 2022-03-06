@@ -19,5 +19,6 @@ SOURCE_AIRPORT = 'LAX'
 SINK_AIRPORT = 'JFK'
 Graph = DataTransformer.create_graph(SOURCE_AIRPORT,SINK_AIRPORT,constants.airports,algo_dataset)
 # print(Graph)
-# log.info("Capacity of the Current Model %d ",max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))
-log.info("Capacity of the Current Model %d ",cxv_max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))
+log.info("Capacity of the Current Model %d (using cvxpy)",cxv_max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))
+log.info("Capacity of the Current Model %d ",max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))
+
