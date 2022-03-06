@@ -1,7 +1,7 @@
 import Algorithm.load as DataLoader
 import Algorithm.transform as DataTransformer
 import Algorithm.logger as logger 
-from Algorithm.flow import max_flow
+from Algorithm.flow import max_flow, cxv_max_flow
 import os
 import json
 import constants
@@ -18,5 +18,6 @@ algo_dataset = DataTransformer.transform(flight_json_array)
 SOURCE_AIRPORT = 'LAX'
 SINK_AIRPORT = 'JFK'
 Graph = DataTransformer.create_graph(SOURCE_AIRPORT,SINK_AIRPORT,constants.airports,algo_dataset)
-
-log.info("Capacity of the Current Model %d ",max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))
+# print(Graph)
+# log.info("Capacity of the Current Model %d ",max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))
+log.info("Capacity of the Current Model %d ",cxv_max_flow(Graph,SOURCE_AIRPORT,SINK_AIRPORT))

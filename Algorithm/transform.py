@@ -160,7 +160,7 @@ def create_graph(source_node:str,sink_node:str,airports:List[str],airline_data:L
         graph_node_names = [airport+":"+str(depart_time) for depart_time in range(24)]
         airport_node_data+=graph_node_names
     
-    Airline_Network_Graph = Graph(source_node,sink_node,airport_node_data)
+    Airline_Network_Graph = Graph(source_node, sink_node, airport_node_data)
     p_infinity = float('inf')
 
     # $ Set Source Node Edges. Each node edge set as p_infinity as a connection for the Source node. Meaning LAX Souce Node Connects LAX:1 , LAX:2, LAX:3 etc

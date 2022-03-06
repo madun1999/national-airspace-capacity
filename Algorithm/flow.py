@@ -1,6 +1,35 @@
 from . import logger as logger
 from .graph import Graph
+from cvxpy import Variable, Problem, Maximize, hstack
 
+def cxv_max_flow(graph_obj:Graph, source:str, sink:str):
+    # one variable for each edge indicating flow
+    source_node_index = graph_obj.get_node_id(source) 
+    sink_node_index = graph_obj.get_node_id(sink)
+
+    flows = Variable(graph_obj.num_flat_edges())
+    source = Variable()
+    sink = Variable()
+    A = graph_obj.incident_matrix()
+    c = graph_obj.capacity_vector()
+    A[-2, -2] = 1
+    A[source_node_index, -2] = -1
+    A[-1, -1] = -1
+    A[sink_node_index, -1] = 1
+    # print(flows.shape, c.shape)
+    prob = Problem(Maximize(-source),
+                [A @ hstack([flows, source, sink]) == 0,
+                 0 <= flows,
+                 0 <= source,
+                 0 <= sink,
+                 flows <= c])
+    # objective is to maximize sum (u \in V) of flow from s to u
+    # constraints:
+    # 1. for all v not s, t, in flow to v = out flow from v
+    # 2. flow <= capacity
+    # 3. flow >= 0
+    print(prob)
+    return prob.solve(verbose=True)
 
 def BFS(graph_object:Graph, source_index, sink_index, parent):
     # Mark all the vertices as not visited
