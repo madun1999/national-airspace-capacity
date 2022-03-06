@@ -1,7 +1,6 @@
 from . import logger as logger
 from .graph import Graph
-from cvxpy import Variable, Problem, Maximize, hstack, vstack
-import cvxopt
+from cvxpy import Variable, Problem, Maximize, hstack
 import numpy
 
 def cxv_max_flow(graph_obj:Graph, source:str, sink:str):
