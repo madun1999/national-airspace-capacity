@@ -1,5 +1,5 @@
-from . import logger as logger
-from .graph import Graph
+# from .logger import logger
+from graph import Graph
 from cvxpy import Variable, Problem, Maximize, hstack
 import numpy
 
@@ -36,6 +36,7 @@ def cxv_max_flow(graph_obj:Graph, source:str, sink:str):
                 [A @ hstack([flows,source,sink]) == 0,
                 0 <= flows,
                 flows <= c])
+    # print(p)
     result = p.solve()
 
     return result
